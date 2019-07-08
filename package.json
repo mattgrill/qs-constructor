@@ -1,0 +1,65 @@
+{
+  "name": "@sosd/qs-constructor",
+  "version": "1.0.1",
+  "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "git@github.com:mattgrill/qs-constructor.git"
+  },
+  "scripts": {
+    "build": "pack build",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.4.0",
+    "@pika/plugin-build-node": "^0.4.0",
+    "@pika/plugin-ts-standard-pkg": "^0.4.0",
+    "@types/qs": "^6.5.3",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "eslint": "^5.0.0",
+    "eslint-config-prettier": "^6.0.0",
+    "prettier": "^1.18.2",
+    "typescript": "^3.5.2"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node",
+        {
+          "minNodeVersion": "10"
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "prettier/@typescript-eslint"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "2018",
+      "sourceType": "module",
+      "project": "./tsconfig.json"
+    }
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "qs": "^6.7.0"
+  }
+}

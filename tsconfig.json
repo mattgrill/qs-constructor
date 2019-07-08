@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "removeComments": true,
+
+    "target": "es2019",
+    "module": "esnext",
+    "esModuleInterop": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  }
+}
