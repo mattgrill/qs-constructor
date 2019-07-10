@@ -14,10 +14,11 @@ interface FieldFilter {
     path: string;
     operator: string;
     value: string;
+    memberOf?: string;
   };
 }
 
-type WhereOperators =
+export type WhereOperators =
   | '='
   | '<>'
   | '>'
@@ -34,23 +35,24 @@ type WhereOperators =
   | 'IS NULL'
   | 'IS NOT NULL';
 
-interface Where {
+export interface Where {
   path: string;
   operator: WhereOperators;
   value: string;
+  group?: string;
 }
 
-enum OrderByDirection {
+export enum OrderByDirection {
   ASC = 'ASC',
   DSC = 'DSC',
 }
 
-interface OrderBy {
+export interface OrderBy {
   path: string;
   direction: OrderByDirection;
 }
 
-interface ResolverArgs {
+export interface ResolverArgs {
   language: string;
   id?: string | undefined;
   orderBy?: OrderBy | undefined;
@@ -67,15 +69,15 @@ const createSort = ({ path, direction }: { path: string; direction: string }): S
 });
 
 const createFieldFilters = (where: Where[] | undefined): FieldFilter =>
-  (where || []).reduce(
-    (acc, { path, operator, value }): FieldFilter => ({
+  (where as Where[]).reduce(
+    (acc, { path, operator, value, group }): FieldFilter => ({
       ...acc,
-      [`filter-${path}`]: { path, operator, value: value },
+      [`filter-${path}`]: { path, operator, value, memberOf: group },
     }),
     {},
   );
 
-const createQueryString = (
+export const createQueryString = (
   { orderBy, language, id, where }: ResolverArgs,
   include: string | undefined,
 ): string => {
@@ -89,7 +91,7 @@ const createQueryString = (
         // Filter by languageCode
         langcode: language,
         // Filter by 'id' if available.
-        id: id ? id.substring(0, id.indexOf('--')) : undefined,
+        id,
         // Filter by fields if any are available.
         ...((where && createFieldFilters(where)) || {}),
       },
@@ -100,5 +102,3 @@ const createQueryString = (
   );
   return queryParams;
 };
-
-export default createQueryString;

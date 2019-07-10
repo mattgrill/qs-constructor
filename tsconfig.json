@@ -4,8 +4,9 @@
     "removeComments": true,
 
     "target": "es2019",
-    "module": "esnext",
+    "module": "esNext",
     "esModuleInterop": true,
+    "moduleResolution": "node",
 
     "strict": true,
     "noImplicitAny": true,
@@ -18,5 +19,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
-  }
+  },
+  "include": ["src/index.ts"],
+  "exclude": ["node_modules", "**/__tests__/*"]
 }

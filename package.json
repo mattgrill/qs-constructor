@@ -1,26 +1,33 @@
 {
   "name": "@sosd/qs-constructor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "git@github.com:mattgrill/qs-constructor.git"
+    "type": "git",
+    "url": "git@github.com:mattgrill/qs-constructor.git"
   },
   "scripts": {
     "build": "pack build",
+    "test": "jest --verbose",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch"
+  },
+  "dependencies": {
+    "qs": "^6.7.0"
   },
   "devDependencies": {
     "@pika/pack": "^0.4.0",
     "@pika/plugin-build-node": "^0.4.0",
     "@pika/plugin-ts-standard-pkg": "^0.4.0",
+    "@types/jest": "^24.0.15",
     "@types/qs": "^6.5.3",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^6.0.0",
+    "jest": "^24.8.0",
     "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.2"
   },
   "@pika/pack": {
@@ -59,7 +66,20 @@
     "tabWidth": 2,
     "trailingComma": "all"
   },
-  "dependencies": {
-    "qs": "^6.7.0"
+  "jest": {
+    "rootDir": "./src",
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "collectCoverage": true,
+    "reporters": [
+      "default"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "coverageDirectory": "coverage"
   }
 }
